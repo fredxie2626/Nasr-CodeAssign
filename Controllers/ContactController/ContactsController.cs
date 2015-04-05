@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CodeAssign.Models.Contacts;
 using System.IO;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace CodeAssign.Controllers.ContactController
 {
@@ -40,9 +41,16 @@ namespace CodeAssign.Controllers.ContactController
                 else
                 {
                     string[] tokens = Search.Split(',');
-                    Contact nearest = CompareNearest(tokens[0],
+                    if(tokens.Count() == 2 && IsFloatNumber(tokens[0], tokens[1]))
+                    {
+                        Contact nearest = CompareNearest(tokens[0],
                                                      tokens[1]);
-                    return View(db.Contacts.Where(x => x.ContactId == nearest.ContactId).ToList());
+                            return View(db.Contacts.Where(x => x.ContactId == nearest.ContactId).ToList());
+                    }
+                    else
+                    {
+                        return View();
+                    }                                                           
                 }
             }
         }
@@ -291,6 +299,15 @@ namespace CodeAssign.Controllers.ContactController
         private double radToDeg(double rad)
         {
             return (rad * 180.0 / Math.PI);
+        }
+
+        public bool IsFloatNumber(string inputString1, string inputString2)
+        {
+            Regex r = new Regex(@"[-+]?[0-9]*\.?[0-9]+");
+            if (r.IsMatch(inputString1) && r.IsMatch(inputString2))
+                return true;
+            else
+                return false;
         }
     }
 }
