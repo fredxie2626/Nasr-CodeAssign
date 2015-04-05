@@ -1,0 +1,138 @@
+﻿@model IEnumerable<CodeAssign.Models.Contacts.Contact>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script type="text/javascript">
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        }
+        else { x.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+    function showPosition(position) {
+        var latlondata = position.coords.latitude + "," + position.coords.longitude;
+        var latlon = "Your Latitude Position is:=" + position.coords.latitude + "," + "Your Longitude Position is:=" + position.coords.longitude;
+        $('#txtSearch').val(latlondata);
+        alert(latlon)
+    }
+    function showError(error) {
+        if (error.code == 1) {
+            x.innerHTML = "User denied the request for Geolocation."
+        }
+        else if (err.code == 2) {
+            x.innerHTML = "Location information is unavailable."
+        }
+        else if (err.code == 3) {
+            x.innerHTML = "The request to get user location timed out."
+        }
+        else {
+            x.innerHTML = "An unknown error occurred."
+        }
+    }
+</script>
+
+<p>
+    @Html.ActionLink("Create New", "Create") | 
+    @Html.ActionLink("List All Contacts", "ListAll")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "Contacts", FormMethod.Get))
+    {
+        <b>Search By: </b>
+        @Html.RadioButton("SearchBy", "FirstName", true) <text>First Name</text>
+        @Html.RadioButton("SearchBy", "LastName") <text>Last Name</text>
+        @Html.RadioButton("SearchBy", "Email") <text>Email</text>
+        @Html.RadioButton("SearchBy", "Nearest") <text>Nearest</text><br />
+        @Html.TextBox("Search", null, new { id = "txtSearch" })
+    <input type="submit" value="Search" /><br/><br />
+    <input type="button" value="Get Location Lotitude and Longitude"
+           onclick="getLocation()" />
+    }
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City.Province.ProvinceCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+@if (Model != null)
+{
+    if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="9">No contacts result found!</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.CityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Province.ProvinceCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ContactId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ContactId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ContactId })
+                </td>
+            </tr>
+        }
+    }
+}
+    
+
+</table>

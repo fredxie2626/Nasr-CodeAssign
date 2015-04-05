@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<!-- Indicators -->
+<ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+</ol>
+
+<!-- Wrapper for slides -->
+<div class="carousel-inner">
+    <div class="item active">
+        <img src="@Url.Content("~/images/1.jpg")" alt="...">
+        <div class="carousel-caption">
+            <h3>Good Samaritans</h3>
+        </div>
+    </div>
+    <div class="item">
+        <img src="@Url.Content("~/images/2.jpg")" alt="...">
+        <div class="carousel-caption">
+            <h3>Saving Lives</h3>
+        </div>
+    </div>
+    <div class="item">
+        <img src="@Url.Content("~/images/3.jpg")" alt="...">
+        <div class="carousel-caption">
+            <h3>Spreading Happiness</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Controls -->
+<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+</a>
+<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+</a>
+</div> <!-- Carousel -->
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>File a report</h2>
+        <p>
+            We allow you to fill in a report about whatever incident has taken place. Make an account and get in there!
+
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Need a job?</h2>
+        <p>Save lives! Get hired for our non-profit organization. Apply online!</p>
+ 
+    </div>
+    <div class="col-md-4">
+        <h2>Anything else?</h2>
+        <p>Come visit our downtown office to get any other help you may need.</p>
+    </div>
+</div>
